@@ -1,0 +1,32 @@
+// ==UserScript==
+// @name         Real-Time URL Monitor
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Sends visited URLs to local Flask server for analysis
+// @match        *://*/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    const sendURL = (url) => {
+        fetch('http://127.0.0.1:5000/capture-url', {  // Updated the URL to match your Flask endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: url }),
+        }).then(response => response.json())
+          .then(data => console.log(data))  // Optional: log the response from the server
+          .catch(error => console.error('Error:', error));  // Optional: log any errors
+    };
+
+    window.addEventListener('load', () => {
+        sendURL(window.location.href);
+    });
+
+    window.addEventListener('hashchange', () => {
+        sendURL(window.location.href);
+    });
+})();
