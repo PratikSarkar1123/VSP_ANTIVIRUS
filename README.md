@@ -1,29 +1,45 @@
-# Python Antivirus Tool
+# VSP Python Antivirus Tool using Python- M.E.CyberSecurity (1st sem Project)
 
 ## Overview
 
-This is a Python-based antivirus tool designed to detect and prevent malware activity on a user's system. The tool combines static and dynamic analysis using external APIs such as **VirusTotal** and **Hybrid Analysis**, along with local file system monitoring for real-time protection. The project includes functionality for file scanning, URL monitoring, cache and junk file removal, and system optimization. With these features, the tool aims to offer a comprehensive solution for protecting systems from known and unknown threats.
+This is a Python-based antivirus tool developed as part of a final year project. The tool is designed to provide multi-layered protection against malware threats by combining both static and dynamic analysis techniques. It integrates external APIs such as **VirusTotal** and **Hybrid Analysis** for virus detection, and includes real-time monitoring of the file system and websites to detect malicious activity. The project leverages **Tampermonkey** for website monitoring and scanning, enhancing the security by scanning URLs accessed by the user.
 
 ## Features
 
-- **Virus Detection**:  
-  Utilizes SHA-256 hashing and external APIs (VirusTotal and Hybrid Analysis) to scan files and detect known malware signatures. The tool automatically queries these APIs to get the latest threat intelligence and scans files for potential threats.
+- **Virus Detection**: 
+  - Uses **SHA-256 hashing** for file scanning.
+  - Integrates with **VirusTotal** and **Hybrid Analysis** APIs to detect known malware signatures by submitting file hashes to these services.
+- **Real-Time File Monitoring**: 
+  - Monitors directories in real-time using Python's **Watchdog** library to detect any new or modified files.
+  - Automatically scans modified or newly created files for potential threats.
+- **Website Scanning**:
+  - Captures URLs visited by the user using **Tampermonkey** browser extension and sends the URLs to **VirusTotal** API for website scanning.
+  - Provides real-time alerts for suspicious or fraudulent websites based on VirusTotal’s analysis.
+- **Cache Removal**:
+  - Deletes browser and system caches to free up space and improve system performance.
+- **Junk File Removal**:
+  - Identifies and removes unnecessary files that could be consuming valuable disk space.
+- **Flask Web Interface**:
+  - A simple web interface using **Flask** to interact with the antivirus tool, making it easier for users to run scans and view results.
+- **Multi-threading**:
+  - Optimized with **multi-threading** for efficient parallel processing, allowing multiple operations (file scans, URL scans, etc.) to run simultaneously.
 
-- **Real-Time File Monitoring**:  
-  Monitors directories in real-time for any new or modified files and scans them for potential threats. When a file is created or modified, the tool checks it against known virus signatures, ensuring prompt detection of malware.
+## Prerequisites
 
-- **Cache Removal**:  
-  Removes browser and system caches to improve performance and free up space. This helps prevent malicious files from being executed from cache and ensures that the system remains optimized.
+Before using this tool, ensure you have the following:
 
-- **Junk File Removal**:  
-  Identifies and removes unnecessary files that could be taking up valuable system resources. This includes temp files, logs, and other system files that are not necessary for day-to-day use.
+- **Python 3.x** (preferably Python 3.7 or later)
+- Basic knowledge of Python and web development (Flask)
+- **API Keys** for external services like **VirusTotal** and **Hybrid Analysis**
+- **Tampermonkey** browser extension (for capturing website URLs)
+  
+### Required Python Libraries
 
-- **Website Scanning**:  
-  Provides real-time detection of suspicious or fraudulent websites using a free API. Alerts users with a reason for the website being flagged as dangerous. This feature helps protect users from phishing attacks and malicious sites by providing real-time monitoring of URLs.
+- **Flask**: For creating a simple web interface.
+- **Requests**: For making HTTP requests to external APIs (VirusTotal, Hybrid Analysis).
+- **Watchdog**: For real-time file monitoring.
+- **Threading**: For multi-threaded execution of various tasks.
+- **os** and **shutil**: For file and directory management.
+- **json**: For handling JSON data from API responses.
 
-- **Flask Web Interface**:  
-  A simple web interface to interact with the antivirus tool for ease of use. Users can start scans, view results, and monitor the status of their system directly from a browser interface, making the tool user-friendly and accessible.
-
-
-
-
+You can install the required libraries using `pip`:
